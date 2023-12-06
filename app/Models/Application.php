@@ -2,14 +2,40 @@
 
 namespace App\Models;
 
+use App\DTOs\ApplicationDTO;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Application extends Model
 {
+    /**
+     * Class Application
+     * @package App\Models
+     *
+     * @property int $id
+     * @property string $user_id
+     * @property string $city
+     * @property string $address
+     * @property string $budget
+     * @property string $phone_whatsapp
+     * @property string $comments
+     * @property string $status
+     * @property Carbon $created_at
+     * @property Carbon $updated_at
+     * @property Carbon $deleted_at
+     *
+     * @property Collection $calculationsRequests
+     * @property Collection $favoriteCatalogMyautoge
+     *
+     * @method static Builder|User query()
+     */
     use HasFactory;
 
     protected $fillable=[
+
         'user_id',
         'city',
         'address',
@@ -18,4 +44,18 @@ class Application extends Model
         'comments',
         'status'
     ];
+
+    public function createApplication(ApplicationDTO $applicationDTO):self
+    {
+        return self::query()->create([
+            'user_id' => $applicationDTO->user_id,
+            'city' => $applicationDTO->city,
+            'address' => $applicationDTO->address,
+            'budget' => $applicationDTO->budget,
+            'phone_whatsapp' => $applicationDTO->phone_whatsapp,
+            'comments' => $applicationDTO->comments,
+            'status' => $applicationDTO->status
+        ]);
+
+    }
 }
