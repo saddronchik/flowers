@@ -25,6 +25,10 @@ Route::post('/password/reset', [ForgotPasswordController::class, 'resetPassword'
 
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/index/application',[ApplicationController::class,'index']);
     Route::post('/create/application',[ApplicationController::class,'create']);
+    Route::post('/status/delete',[ApplicationController::class,'status_delete']);
+    Route::post('/status/by_store',[ApplicationController::class,'status_by_store']);
+    Route::post('/status/by_other_store',[ApplicationController::class,'status_by_other_store']);
 
 });

@@ -34,8 +34,12 @@ class Application extends Model
      */
     use HasFactory;
 
-    protected $fillable=[
+    const STATUS_ACTIVE = 'Active';
+    const STATUS_DELETE = 'Deleted';
+    const STATUS_BY_STORE = 'By_in_store';
+    const STATUS_BY_OTHER_STORE = 'By_other_store';
 
+    protected $fillable=[
         'user_id',
         'city',
         'address',
@@ -54,7 +58,7 @@ class Application extends Model
             'budget' => $applicationDTO->budget,
             'phone_whatsapp' => $applicationDTO->phone_whatsapp,
             'comments' => $applicationDTO->comments,
-            'status' => $applicationDTO->status
+            'status' => self::STATUS_ACTIVE
         ]);
 
     }

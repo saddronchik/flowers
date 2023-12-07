@@ -25,6 +25,8 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'fcm_token' => $this->fcm_token,
             'city' => $this->city,
+            'crated_at' => $this->crated_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 
