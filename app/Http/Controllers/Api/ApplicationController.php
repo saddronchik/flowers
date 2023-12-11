@@ -19,6 +19,18 @@ class ApplicationController extends Controller
             'application' => $application
         ]);
     }
+
+    public function index_city(Request $request)
+    {
+        $application = Application::all()
+            ->where('status','!=',Application::STATUS_DELETE)
+            ->where('city','=',$request->city);
+
+        return response()->json([
+            'status' => true,
+            'application' => $application
+        ]);
+    }
     public function create(ApplicationRequest $request)
     {
         $applicationDTO = ApplicationDTO::fromArray($request->validated());
@@ -31,6 +43,31 @@ class ApplicationController extends Controller
             'application' => new ApplicationRecource($application)
         ])->setStatusCode(201);
     }
+
+    public function useradd_application(Request $request)
+    {
+        $application = Application::query()->where('id','=', $request->id)->firstOrFail();
+
+        $application->update(['user_id' => $request->user_id]);
+
+        return response()->json(['status' => true, 'application'=>$application]);
+    }
+    public function user_application(Request $request)
+    {
+        $application = Application::query()->where('user_id','=', $request->user_id)->firstOrFail();
+
+        return response()->json(['status' => true, 'application'=>$application]);
+    }
+
+    public function range_application(Request $request)
+    {
+        $application = Application::query()
+            ->whereBetween('budget', [$request->from, $request->to])
+            ->get();
+
+        return response()->json(['status' => true, 'application'=>$application]);
+    }
+
 
     public function status_delete(Request $request)
     {
