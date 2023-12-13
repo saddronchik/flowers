@@ -7,7 +7,9 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
+use MoonShine\Models\MoonshineUser;
 
 class Application extends Model
 {
@@ -46,8 +48,16 @@ class Application extends Model
         'budget',
         'phone_whatsapp',
         'comments',
-        'status'
+        'status',
+        'moonshine_user_id'
     ];
+
+    protected $with = ['moonshineUser'];
+
+    public function moonshineUser(): BelongsTo
+    {
+        return $this->belongsTo(MoonshineUser::class);
+    }
 
     public function createApplication(ApplicationDTO $applicationDTO):self
     {
