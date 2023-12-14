@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\MoonShine\Resources\ApplicationResource;
-use App\MoonShine\Resources\SellersResource;
+use App\MoonShine\Resources\UsersResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
@@ -31,7 +31,7 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 
             MenuGroup::make('Сбор информации',[
                 MenuItem::make('Заявки цветов',new ApplicationResource()),
-                MenuItem::make('Продавцы',new SellersResource()),
+                MenuItem::make('Продавцы',new UsersResource()),
             ]),
             MenuGroup::make(static fn() => __('moonshine::ui.resource.system'), [
                MenuItem::make(

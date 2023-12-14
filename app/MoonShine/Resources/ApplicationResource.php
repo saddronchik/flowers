@@ -27,6 +27,11 @@ class ApplicationResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
+                BelongsTo::make('Продавец', 'user',
+                    fn($user)=> $user->id.' | '.$user->store_name,
+                    resource: new UsersResource())
+                    ->asyncSearch()
+                    ->required(),
                 Select::make('Город','city')
                     ->options([
                         'Алматы'=>'Алматы',
@@ -36,8 +41,10 @@ class ApplicationResource extends ModelResource
                     ->required(),
                 Text::make('Адрес','address')->required(),
                 Number::make('Бюджет','budget')->required(),
-                Number::make('Whatsapp','phone_whatsapp')->required(),
-                TinyMce::make('Комментарий','comments')->required(),
+                Text::make('Whatsapp','phone_whatsapp')->required(),
+                TinyMce::make('Комментарий','comments')
+                    ->hideOnIndex()
+                    ->required(),
                 Select::make('Статус','status')
                     ->options([
                         Application::STATUS_ACTIVE=>'Активна',
@@ -48,15 +55,6 @@ class ApplicationResource extends ModelResource
                     ->required(),
                 BelongsTo::make('Автор', 'moonshineUser',
                     resource: new MoonShineUserResource())->required(),
-
-//                BelongsTo::make('Автор','moonshineUser', new MoonShineUserResource())
-//                    ->required()
-//                    ->addLink('ссылка на автора', function() {
-//                        if(!$this->getItem()) {
-//                            return route('moonshine.moonShineUsers.index');
-//                        }
-//                        return route('moonshine.moonShineUsers.show',$this->getItem()->moonshine_user_id);
-//                    }),
             ]),
         ];
     }

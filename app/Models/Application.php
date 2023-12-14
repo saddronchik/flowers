@@ -52,8 +52,11 @@ class Application extends Model
         'moonshine_user_id'
     ];
 
-    protected $with = ['moonshineUser'];
-
+    protected $with = ['moonshineUser','user'];
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
     public function moonshineUser(): BelongsTo
     {
         return $this->belongsTo(MoonshineUser::class);
