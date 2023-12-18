@@ -7,7 +7,7 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Application;
 use MoonShine\Fields\TinyMce;
-use MoonShine\Resources\MoonShineUserResource;
+
 use MoonShine\Fields\Number;
 use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Select;
@@ -54,7 +54,7 @@ class ApplicationResource extends ModelResource
                     ])
                     ->required(),
                 BelongsTo::make('Автор', 'moonshineUser',
-                    resource: new MoonShineUserResource())->required(),
+                    resource: new MoonshineUserResource())->required(),
             ]),
         ];
     }
