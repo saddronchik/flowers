@@ -29,7 +29,7 @@ services:
         expose:
             - 9000
         environment:
-            - TZ=Europe/Moscow
+               TZ: '${APP_TIMEZONE}'
 
     cron:
         build:
@@ -53,6 +53,7 @@ services:
             MYSQL_USER: '${DB_USERNAME}'
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
+            TZ: '${APP_TIMEZONE}'
         volumes:
             - '${APP_CODE_PATH_HOST}/storage/docker/mysql:/var/lib/mysql'
             - '${APP_CODE_PATH_HOST}/docker/mysql/my.cnf:/etc/mysql/my.cnf'
