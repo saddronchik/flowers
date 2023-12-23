@@ -23,6 +23,7 @@ class ForgotPasswordRequest extends FormRequest
     {
         return [
             'login' => ['required', 'string'],
+            'password_old' => ['required', 'string'],
             'password' => ['required', 'string'],
             'password_confirmation' => ['required', 'string'],
         ];

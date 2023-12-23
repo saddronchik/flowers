@@ -12,7 +12,7 @@ class UserDTO extends ValidatedDTO
     public ?string $password;
     public ?string $fcm_token;
     public ?string $city;
-    public mixed $email;
+    public ?string $status;
     public mixed $store_name;
     public mixed $full_name;
     public mixed $login;
@@ -25,10 +25,10 @@ class UserDTO extends ValidatedDTO
             'store_name' => ['nullable', 'string'],
             'phone' => ['nullable', 'string',],
             'login' => ['nullable', 'string'],
-            'email' => ['nullable', 'string'],
             'password' => ['nullable'],
             'fcm_token' => ['nullable', 'string'],
             'city' => ['nullable', 'string'],
+            'status' => ['nullable', 'string'],
         ];
     }
 

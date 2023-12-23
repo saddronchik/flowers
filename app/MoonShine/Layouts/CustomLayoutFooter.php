@@ -36,7 +36,7 @@ final class CustomLayoutFooter implements MoonShineLayoutContract
                 ]),
                 Content::make(),
                 Footer::make()->copyright(fn (): string => <<<'HTML'
-                        &copy; 2023 Made with ❤️
+                        &copy; 2023
                     HTML)->menu([
 
                 ]),

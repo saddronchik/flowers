@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Pages\Dashboard;
 use App\MoonShine\Resources\ApplicationResource;
 use App\MoonShine\Resources\MoonshineUserResource;
 use App\MoonShine\Resources\UsersResource;
@@ -30,6 +31,9 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
     {
         return [
 
+            MenuGroup::make('Раздел аналитики',[
+                MenuItem::make('Аналитика',new Dashboard()),
+            ]),
             MenuGroup::make('Сбор информации',[
                 MenuItem::make('Заявки цветов',new ApplicationResource()),
                 MenuItem::make('Продавцы',new UsersResource()),
@@ -40,14 +44,11 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 //                   static fn() => __('Пользователи'),
 //                   new MoonShineUserResource()
 //               ),
-               MenuItem::make(
-                   static fn() => __('moonshine::ui.resource.role_title'),
-                   new MoonShineUserRoleResource()
-               ),
+//               MenuItem::make(
+//                   static fn() => __('moonshine::ui.resource.role_title'),
+//                   new MoonShineUserRoleResource()
+//               ),
             ]),
-
-//            MenuItem::make('Documentation', 'https://moonshine-laravel.com')
-//               ->badge(fn() => 'Check'),
         ];
     }
 

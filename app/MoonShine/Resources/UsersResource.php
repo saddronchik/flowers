@@ -42,6 +42,14 @@ class UsersResource extends ModelResource
                     ])
                     ->required(),
 
+                Select::make('Статус','status')
+                    ->options([
+                        User::STATUS_MODERATION=>'На модерации',
+                        User::STATUS_ACTIVE=>'Активен',
+                        User::STATUS_REFUSED=>'Отказано',
+                    ])->default('Status')
+                    ->required(),
+
                 HasMany::make('Заявки','applications', resource: new ApplicationResource())
                     ->async()
                     ->creatable()

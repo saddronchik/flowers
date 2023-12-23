@@ -27,10 +27,10 @@ class RegisterRequest extends FormRequest
             'store_name' => ['nullable', 'string'],
             'phone' => ['required', 'string'],
             'login' => ['required', 'string'],
-            'email' => ['required', 'string'],
             'password' => ['required', 'string'],
             'fcm_token' => ['nullable', 'string'],
             'city' => ['nullable', 'string'],
+            'status' => ['nullable', 'string'],
 
         ];
     }

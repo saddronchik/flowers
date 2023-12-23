@@ -26,6 +26,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $store_name
  * @property string $login
  * @property string $email
+// * @property string $status
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
@@ -39,12 +40,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const STATUS_MODERATION= 'Moderation';
+    const STATUS_ACTIVE = 'Active';
+    const STATUS_REFUSED = 'Refused';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'full_name',
         'city',
@@ -55,6 +54,7 @@ class User extends Authenticatable
         'email',
         'email_verified_at',
         'password',
+        'status'
     ];
 
     /**
@@ -79,10 +79,10 @@ class User extends Authenticatable
             'store_name' => $userDTO->store_name,
             'phone' => $userDTO->phone,
             'login' => $userDTO->login,
-            'email' => $userDTO->email,
             'password' => bcrypt($userDTO->password),
             'fcm_token' => $userDTO->fcm_token,
-            'city' => $userDTO->city
+            'city' => $userDTO->city,
+            'status' => self::STATUS_MODERATION
         ]);
     }
 
