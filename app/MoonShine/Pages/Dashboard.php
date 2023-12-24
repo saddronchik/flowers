@@ -63,7 +63,7 @@ class Dashboard extends Page
                     ->columnSpan(6)
             ]),
             DonutChartMetric::make('Диаграмма бюджета')
-                ->values(['до 10000' => Application::query()->where('budget','<','10000')->count(),
+                ->values(['до 10000' => Application::query()->where('budget','<=','10000')->count(),
                         'до 15000' => Application::query()->whereBetween('budget',[10001, 15000])->count(),
                         'до 20000' => Application::query()->whereBetween('budget',[15001, 20000])->count(),
                         'до 30000' => Application::query()->whereBetween('budget',[20001, 30000])->count(),

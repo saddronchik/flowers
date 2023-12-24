@@ -54,7 +54,7 @@ class ApplicationController extends Controller
     }
     public function user_application(Request $request)
     {
-        $application = Application::query()->where('user_id','=', $request->user_id)->firstOrFail();
+        $application = Application::query()->where('user_id','=', $request->user_id)->get();
 
         return response()->json(['status' => true, 'application'=>$application]);
     }
