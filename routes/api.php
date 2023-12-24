@@ -3,8 +3,8 @@
 use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\MailController;
 use App\Http\Controllers\Api\Auth\RegisterController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +22,9 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::post('/password/reset', [ForgotPasswordController::class, 'resetPassword']);
+
+Route::post('/register/buyer', [MailController::class, 'register']);
+Route::post('/sendCode', [MailController::class, 'sendCode']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function () {

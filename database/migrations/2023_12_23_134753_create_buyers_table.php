@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('status')->nullable()->unique();
+            $table->string('code')->nullable();
+            $table->string('status')->nullable();
+            $table->string('remember_token')->nullable()->unique();
             $table->timestamps();
         });
     }
