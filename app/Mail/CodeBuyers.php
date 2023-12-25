@@ -28,7 +28,7 @@ class CodeBuyers extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Code Buyers',
+            subject: 'Code Buyer',
         );
     }
 

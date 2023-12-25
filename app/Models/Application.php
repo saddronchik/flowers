@@ -49,7 +49,7 @@ class Application extends Model
         'phone_whatsapp',
         'comments',
         'status',
-        'moonshine_user_id'
+        'buyer_id'
     ];
 
     protected $with = ['moonshineUser','user'];

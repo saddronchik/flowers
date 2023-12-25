@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Buyers;
+use App\Models\Buyer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,7 +15,7 @@ class BuyersResource extends JsonResource
      */
     public function toArray($request): array
     {
-        /** @var Buyers $this */
+        /** @var Buyer $this */
         return [
             'id' => $this->id,
             'email' => $this->email,

@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('applications', function (Blueprint $table) {
-            $table->foreignIdFor(\MoonShine\Models\MoonshineUser::class)->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Buyer::class)->nullable()->constrained()->cascadeOnDelete();
+
         });
     }
 

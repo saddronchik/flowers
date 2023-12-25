@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\LoginMailController;
 use App\Http\Controllers\Api\Auth\MailController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,9 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::post('/password/reset', [ForgotPasswordController::class, 'resetPassword']);
 
 Route::post('/register/buyer', [MailController::class, 'register']);
+Route::post('/login/buyer', [LoginMailController::class, 'login']);
+Route::post('/logout/buyer', [LoginMailController::class, 'logout']);
+
 Route::post('/sendCode', [MailController::class, 'sendCode']);
 
 

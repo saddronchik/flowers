@@ -7,12 +7,13 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * Class Buyers
+ * Class Buyer
  * @package App\Models
  *
  * @property int $id
@@ -26,7 +27,7 @@ use Laravel\Sanctum\HasApiTokens;
  *
  * @method static Builder|User query()
  */
-class Buyers extends Model
+class Buyer extends Authenticatable
 {
     use HasFactory,HasApiTokens,Notifiable;
     const STATUS_ACTIVE = 'Active';
@@ -38,7 +39,7 @@ class Buyers extends Model
     {
         return self::query()->create([
             'email' => $buyersDTO->email,
-            'code' => $buyersDTO->code,
+            'code' => bcrypt($buyersDTO->code),
             'status' => self::STATUS_ACTIVE,
         ]);
     }
