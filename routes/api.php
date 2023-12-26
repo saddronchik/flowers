@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/useradd/application',[ApplicationController::class,'useradd_application']);
     Route::post('/user/application',[ApplicationController::class,'user_application']);
 
+    Route::post('/buyer/application',[ApplicationController::class,'buyers_application']);
+
     Route::post('/status/delete',[ApplicationController::class,'status_delete']);
     Route::post('/status/by_store',[ApplicationController::class,'status_by_store']);
     Route::post('/status/by_other_store',[ApplicationController::class,'status_by_other_store']);

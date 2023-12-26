@@ -52,9 +52,17 @@ class ApplicationController extends Controller
 
         return response()->json(['status' => true, 'application'=>$application]);
     }
+
     public function user_application(Request $request)
     {
         $application = Application::query()->where('user_id','=', $request->user_id)->get();
+
+        return response()->json(['status' => true, 'application'=>$application]);
+    }
+
+    public function buyers_application(Request $request)
+    {
+        $application = Application::query()->where('buyer_id','=', $request->buyer_id)->get();
 
         return response()->json(['status' => true, 'application'=>$application]);
     }
