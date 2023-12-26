@@ -26,7 +26,7 @@ class LoginMailController extends Controller
         return response()->json([
             'status' => true,
             'token' => $token,
-            'user' => new BuyersResource($buyer)
+            'buyer' => new BuyersResource($buyer)
         ])->setStatusCode(200);
     }
 
