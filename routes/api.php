@@ -28,9 +28,6 @@ Route::post('/register/buyer', [MailController::class, 'register']);
 Route::post('/login/buyer', [LoginMailController::class, 'login']);
 Route::post('/logout/buyer', [LoginMailController::class, 'logout']);
 
-Route::post('/sendCode', [MailController::class, 'sendCode']);
-
-
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/index/application',[ApplicationController::class,'index']);
     Route::post('/index_city/application',[ApplicationController::class,'index_city']);

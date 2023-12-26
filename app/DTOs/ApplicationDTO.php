@@ -25,6 +25,7 @@ class ApplicationDTO extends ValidatedDTO
            'phone_whatsapp' => ['nullable', 'string'],
            'comments' => ['nullable', 'string'],
            'status' => ['nullable', 'string'],
+           'buyer_id' => ['nullable', 'string'],
        ];
     }
 

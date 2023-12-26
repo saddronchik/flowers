@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\MoonShine\Pages\Dashboard;
+use App\MoonShine\Resources\AcceptUsersResource;
 use App\MoonShine\Resources\ApplicationResource;
+use App\MoonShine\Resources\BuyersResource;
 use App\MoonShine\Resources\MoonshineUserResource;
 use App\MoonShine\Resources\UsersResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
@@ -34,10 +36,21 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             MenuGroup::make('Раздел аналитики',[
                 MenuItem::make('Аналитика',new Dashboard()),
             ]),
-            MenuGroup::make('Сбор информации',[
-                MenuItem::make('Заявки цветов',new ApplicationResource()),
-                MenuItem::make('Продавцы',new UsersResource()),
+            MenuGroup::make('Раздел заявок',[
+                MenuItem::make('Карточки заявок',new ApplicationResource()),
             ]),
+            MenuGroup::make('Раздел продавцов',[
+                MenuItem::make('Продавцы',new UsersResource()),
+                MenuItem::make('Откликнувшиеся',new AcceptUsersResource()),
+            ]),
+            MenuGroup::make('Раздел покупателей',[
+                MenuItem::make('Покупатели',new BuyersResource()),
+            ]),
+//            MenuGroup::make('Сбор информации',[
+//                MenuItem::make('Заявки цветов',new ApplicationResource()),
+//                MenuItem::make('Продавцы',new UsersResource()),
+//                MenuItem::make('Покупатели',new BuyersResource()),
+//            ]),
             MenuGroup::make(static fn() => __('moonshine::ui.resource.system'), [
                 MenuItem::make('Пользователи',new MoonshineUserResource()),
 //               MenuItem::make(

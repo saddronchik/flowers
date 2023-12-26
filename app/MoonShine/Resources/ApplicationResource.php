@@ -20,7 +20,7 @@ class ApplicationResource extends ModelResource
 {
     protected string $model = Application::class;
 
-    protected string $title = 'Список заявок на покупку цветов';
+    protected string $title = 'Список заявок';
 
     public function fields(): array
     {
@@ -53,8 +53,9 @@ class ApplicationResource extends ModelResource
                         Application::STATUS_BY_OTHER_STORE=>'Куплена в другом месте'
                     ])
                     ->required(),
-                BelongsTo::make('Автор', 'moonshineUser',
-                    resource: new MoonshineUserResource())->required(),
+                BelongsTo::make('Автор', 'buyer',
+                    fn($buyer)=> $buyer->id.' | '.$buyer->email,
+                    resource: new BuyersResource())->required(),
             ]),
         ];
     }

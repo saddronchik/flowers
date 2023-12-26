@@ -21,12 +21,16 @@ class MailController extends Controller
         $existingUser = Buyer::where('email', $email)->first();
 
         if ($existingUser) {
+            $new_code = Str::random(10);
+
             $data = [
                 'email'=>$request->email,
-                'code'=>$existingUser->code
+                'code'=>$new_code
             ];
+            $existingUser->update(['code' => bcrypt($new_code)]);
+
             Mail::to($request->email)->send(new CodeBuyers($data));
-            return response()->json(['status' => true,'code' => $existingUser->code])->setStatusCode(201);
+            return response()->json(['status' => true,'data' => $data])->setStatusCode(201);
         }
 
         $data = [

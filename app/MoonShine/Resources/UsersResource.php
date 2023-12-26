@@ -31,9 +31,6 @@ class UsersResource extends ModelResource
                 Text::make('Логин','login')
                     ->hideOnIndex()
                     ->required(),
-                Text::make('Email','email')
-                    ->hideOnIndex()
-                    ->required(),
                 Select::make('Город','city')
                     ->options([
                         'Алматы'=>'Алматы',
@@ -53,7 +50,6 @@ class UsersResource extends ModelResource
                 HasMany::make('Заявки','applications', resource: new ApplicationResource())
                     ->async()
                     ->creatable()
-//                    ->hideOnDetail()
                     ->hideOnIndex(),
             ]),
         ];

@@ -52,14 +52,14 @@ class Application extends Model
         'buyer_id'
     ];
 
-    protected $with = ['moonshineUser','user'];
+    protected $with = ['buyer','user'];
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    public function moonshineUser(): BelongsTo
+    public function buyer(): BelongsTo
     {
-        return $this->belongsTo(MoonshineUser::class);
+        return $this->belongsTo(Buyer::class);
     }
 
     public function createApplication(ApplicationDTO $applicationDTO):self
@@ -71,7 +71,8 @@ class Application extends Model
             'budget' => $applicationDTO->budget,
             'phone_whatsapp' => $applicationDTO->phone_whatsapp,
             'comments' => $applicationDTO->comments,
-            'status' => self::STATUS_ACTIVE
+            'status' => self::STATUS_ACTIVE,
+            'buyer_id' => $applicationDTO->buyer_id
         ]);
 
     }

@@ -25,6 +25,7 @@ class ApplicationRecource extends JsonResource
             'phone_whatsapp' => $this->phone_whatsapp,
             'comments' => $this->comments,
             'status' => $this->status,
+            'buyer_id' => $this->buyer_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

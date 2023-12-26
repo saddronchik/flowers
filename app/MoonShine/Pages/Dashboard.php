@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages;
 
 use App\Models\Application;
+use App\Models\Buyer;
 use App\Models\MoonshineUser;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -31,11 +32,11 @@ class Dashboard extends Page
 	{
 		return [
             Grid::make([
-                ValueMetric::make('Среднее количество заявок на пользователя')
+                ValueMetric::make('Среднее количество заявок на покупателя')
                     ->value(
-                        round(intval(MoonshineUser::join('applications', 'moonshine_users.id', '=', 'moonshine_user_id')
-                            ->select('moonshine_users.id', 'moonshine_users.name', DB::raw('COUNT(applications.id)'))
-                            ->groupBy('moonshine_users.id', 'moonshine_users.name')
+                        round(intval(Buyer::join('applications', 'buyers.id', '=', 'buyer_id')
+                            ->select('buyers.id', 'buyers.email', DB::raw('COUNT(applications.id)'))
+                            ->groupBy('buyers.id', 'buyers.email')
                             ->average('applications.id'))),2)
                             ->columnSpan(3),
 
@@ -43,11 +44,6 @@ class Dashboard extends Page
                     ->value(round(intval(Application::avg('budget'))). ' ₸')
                     ->columnSpan(3),
 
-                ValueMetric::make('Кол-во заявок от данного пользователя')
-                    ->value(
-                        Application::query()->where('moonshine_user_id','=',auth()->user()->id)
-                        ->count())
-                    ->columnSpan(3),
             ]),
             Grid::make([
                 DonutChartMetric::make('Общее кол-во заявок')
@@ -59,7 +55,11 @@ class Dashboard extends Page
                     ])
                     ->columnSpan(6),
                 DonutChartMetric::make('Пользователей')
-                    ->values(['Продавцы' => User::query()->count(), 'Пользователи' => MoonshineUser::query()->count()])
+                    ->values([
+                        'Продавцы' => User::query()->count(),
+                        'Пользователи' => MoonshineUser::query()->count(),
+                        'Покупатели'=>Buyer::query()->count(),
+                    ])
                     ->columnSpan(6)
             ]),
             DonutChartMetric::make('Диаграмма бюджета')

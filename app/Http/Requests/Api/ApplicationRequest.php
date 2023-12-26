@@ -29,6 +29,7 @@ class ApplicationRequest extends FormRequest
             'phone_whatsapp' => ['required', 'string'],
             'comments' => ['nullable', 'string'],
             'status' => ['nullable', 'string'],
+            'buyer_id' => ['nullable', 'string'],
         ];
     }
 }
