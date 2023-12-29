@@ -57,7 +57,10 @@ class UsersResource extends ModelResource
                     ->required(),
 
                 Text::make('Кол-во предложений')
-                    ->changeFill(fn(User $user, Field $field)=>$user->applications()->count()),
+                    ->changeFill(fn(User $user, Field $field)=>$user->applications()->count())
+                    ->hideOnDetail()
+                    ->hideOnCreate()
+                    ->hideOnUpdate(),
 
                 HasMany::make('Заявки','applications', resource: new ApplicationResource())
                     ->async()
