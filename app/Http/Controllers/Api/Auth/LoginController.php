@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\LogoutRequest;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Services\Auth\LoginService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -46,5 +47,17 @@ class LoginController extends Controller
         $this->loginService->logout(auth('sanctum')->id());
 
         return response()->noContent();
+    }
+
+    public function deleteUser(Request $request): JsonResponse
+    {
+        try {
+            $user = User::query()->findOrFail($request->user_id)->forceDelete();
+        } catch (\Exception $e) {
+            throw new AuthException($e->getMessage());
+        }
+
+        return response()->json(['status' => true])
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

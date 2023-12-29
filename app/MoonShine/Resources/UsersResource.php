@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
+use App\Models\Application;
 use App\Models\User;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use MoonShine\Fields\Field;
 use MoonShine\Fields\Relationships\HasMany;
 use MoonShine\Fields\Relationships\HasOne;
 use MoonShine\Fields\Select;
@@ -13,12 +16,18 @@ use MoonShine\Fields\Text;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 class UsersResource extends ModelResource
 {
     protected string $model = User::class;
 
     protected string $title = 'Список продавцов цветов';
+
+    public function query(): Builder
+    {
+        return parent::query()->withCount('applications');
+    }
 
     public function fields(): array
     {
@@ -46,6 +55,9 @@ class UsersResource extends ModelResource
                         User::STATUS_REFUSED=>'Отказано',
                     ])->default('Status')
                     ->required(),
+
+                Text::make('Кол-во предложений')
+                    ->changeFill(fn(User $user, Field $field)=>$user->applications()->count()),
 
                 HasMany::make('Заявки','applications', resource: new ApplicationResource())
                     ->async()

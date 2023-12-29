@@ -44,4 +44,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/status/by_store',[ApplicationController::class,'status_by_store']);
     Route::post('/status/by_other_store',[ApplicationController::class,'status_by_other_store']);
 
+    Route::post('/user/delete', [LoginController::class, 'deleteUser']);
+
+    Route::post('/buyer/delete', [LoginMailController::class, 'deleteBuyer']);
 });
