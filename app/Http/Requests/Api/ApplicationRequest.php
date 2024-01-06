@@ -24,7 +24,7 @@ class ApplicationRequest extends FormRequest
         return [
             'user_id' => ['nullable', 'string'],
             'city' => ['required','string'],
-            'address' => ['required', 'string'],
+            'address' => ['nullable', 'string'],
             'budget' => ['required', 'string'],
             'phone_whatsapp' => ['required', 'string'],
             'comments' => ['nullable', 'string'],
