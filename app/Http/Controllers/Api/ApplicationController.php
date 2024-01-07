@@ -13,7 +13,8 @@ class ApplicationController extends Controller
 {
     public function index()
     {
-        $application = Application::all()->where('status','!=',Application::STATUS_DELETE);
+        $application = Application::all()
+            ->where('status','=',Application::STATUS_ACTIVE);
         return response()->json([
             'status' => true,
             'application' => $application
@@ -23,7 +24,7 @@ class ApplicationController extends Controller
     public function index_city(Request $request)
     {
         $application = Application::all()
-            ->where('status','!=',Application::STATUS_DELETE)
+            ->where('status','=',Application::STATUS_ACTIVE)
             ->where('city','=',$request->city);
 
         return response()->json([
@@ -55,14 +56,20 @@ class ApplicationController extends Controller
 
     public function user_application(Request $request)
     {
-        $application = Application::query()->where('user_id','=', $request->user_id)->get();
+        $application = Application::query()
+            ->where('user_id','=', $request->user_id)
+            ->where('status','=',Application::STATUS_ACTIVE)
+            ->get();
 
         return response()->json(['status' => true, 'application'=>$application]);
     }
 
     public function buyers_application(Request $request)
     {
-        $application = Application::query()->where('buyer_id','=', $request->buyer_id)->get();
+        $application = Application::query()
+            ->where('buyer_id','=', $request->buyer_id)
+            ->where('status','=',Application::STATUS_ACTIVE)
+            ->get();
 
         return response()->json(['status' => true, 'application'=>$application]);
     }
@@ -71,6 +78,7 @@ class ApplicationController extends Controller
     {
         $application = Application::query()
             ->whereBetween('budget', [$request->from, $request->to])
+            ->where('status','=',Application::STATUS_ACTIVE)
             ->get();
 
         return response()->json(['status' => true, 'application'=>$application]);
