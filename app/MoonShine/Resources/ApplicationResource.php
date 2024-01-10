@@ -42,7 +42,7 @@ class ApplicationResource extends ModelResource
                 Text::make('Адрес','address')->required(),
                 Number::make('Бюджет','budget')->required(),
                 Text::make('Whatsapp','phone_whatsapp')->required(),
-                TinyMce::make('Комментарий','comments')
+                Text::make('Комментарий','comments')
                     ->hideOnIndex()
                     ->required(),
                 Select::make('Статус','status')
