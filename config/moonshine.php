@@ -14,8 +14,8 @@ return [
     'namespace' => 'App\MoonShine',
 
     'title' => env('Flowers', 'Flowers'),
-    'logo' => false,
-    'logo_small' => false,
+    'logo' => env('MOONSHINE_LOGO'),
+    'logo_small' => env('MOONSHINE_LOGO'),
 
     'route' => [
         'domain' => env('MOONSHINE_URL', ''),
@@ -75,8 +75,8 @@ return [
         'pipelines' => [],
     ],
     'locales' => [
-        'en',
         'ru',
+
     ],
 
     'global_search' => [
