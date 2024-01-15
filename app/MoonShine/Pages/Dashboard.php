@@ -38,11 +38,11 @@ class Dashboard extends Page
                             ->select('buyers.id', 'buyers.email', DB::raw('COUNT(applications.id)'))
                             ->groupBy('buyers.id', 'buyers.email')
                             ->average('applications.id'))),2)
-                            ->columnSpan(3),
+                            ->columnSpan(6),
 
                 ValueMetric::make('Средней бюджет заявок')
                     ->value(round(intval(Application::avg('budget'))). ' ₸')
-                    ->columnSpan(3),
+                    ->columnSpan(6),
 
             ]),
             Grid::make([
