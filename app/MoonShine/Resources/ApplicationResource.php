@@ -27,25 +27,25 @@ class ApplicationResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
-                BelongsTo::make('Продавец', 'user',
+                BelongsTo::make(trans('buttons.user'), 'user',
                     fn($user)=> $user->id.' | '.$user->store_name,
                     resource: new UsersResource())
                     ->asyncSearch()
                     ->required(),
-                Select::make('Город','city')
+                Select::make(trans('buttons.city'),'city')
                     ->options([
                         'Алматы'=>'Алматы',
                         'Астана'=>'Астана',
                         'Караганда'=>'Караганда'
                     ])
                     ->required(),
-                Text::make('Адрес','address')->required(),
-                Number::make('Бюджет','budget')->required(),
-                Text::make('Whatsapp','phone_whatsapp')->required(),
-                Text::make('Комментарий','comments')
+                Text::make(trans('buttons.address'),'address')->required(),
+                Number::make(trans('buttons.budget'),'budget')->required(),
+                Text::make(trans('buttons.phone_whatsapp'),'phone_whatsapp')->required(),
+                Text::make(trans('buttons.comments'),'comments')
                     ->hideOnIndex()
                     ->required(),
-                Select::make('Статус','status')
+                Select::make(trans('buttons.status'),'status')
                     ->options([
                         Application::STATUS_ACTIVE=>'Активна',
                         Application::STATUS_DELETE=>'Удалена',
@@ -53,7 +53,7 @@ class ApplicationResource extends ModelResource
                         Application::STATUS_BY_OTHER_STORE=>'Куплена в другом месте'
                     ])
                     ->required(),
-                BelongsTo::make('Автор', 'buyer',
+                BelongsTo::make(trans('buttons.buyer'), 'buyer',
                     fn($buyer)=> $buyer->id.' | '.$buyer->email,
                     resource: new BuyersResource())->required(),
             ]),

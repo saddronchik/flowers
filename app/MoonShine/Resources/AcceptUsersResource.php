@@ -6,6 +6,7 @@ namespace App\MoonShine\Resources;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use MoonShine\Fields\Field;
 use MoonShine\Fields\Relationships\HasMany;
 use MoonShine\Fields\Relationships\HasOne;
 use MoonShine\Fields\Select;
@@ -29,13 +30,13 @@ class AcceptUsersResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
-                Text::make('ФИО', 'full_name')->required(),
-                Text::make('Название', 'store_name')->required(),
-                Text::make('Телефон', 'phone')->required(),
-                Text::make('Логин', 'login')
+                Text::make(trans('buttons.full_name'), 'full_name')->required(),
+                Text::make(trans('buttons.store_name'), 'store_name')->required(),
+                Text::make(trans('buttons.phone'), 'phone')->required(),
+                Text::make(trans('buttons.login'), 'login')
                     ->hideOnIndex()
                     ->required(),
-                Select::make('Город', 'city')
+                Select::make(trans('buttons.city'), 'city')
                     ->options([
                         'Алматы' => 'Алматы',
                         'Астана' => 'Астана',
@@ -43,7 +44,7 @@ class AcceptUsersResource extends ModelResource
                     ])
                     ->required(),
 
-                Select::make('Статус', 'status')
+                Select::make(trans('buttons.status'), 'status')
                     ->options([
                         User::STATUS_MODERATION => 'На модерации',
                         User::STATUS_ACTIVE => 'Активен',
@@ -51,7 +52,13 @@ class AcceptUsersResource extends ModelResource
                     ])->default('Status')
                     ->required(),
 
-                HasMany::make('Заявки', 'applications', resource: new ApplicationResource())
+                Text::make(trans('buttons.count_applications'))
+                    ->changeFill(fn(User $user, Field $field)=>$user->applications()->count())
+                    ->hideOnDetail()
+                    ->hideOnCreate()
+                    ->hideOnUpdate(),
+
+                HasMany::make(trans('buttons.applications'), 'applications', resource: new ApplicationResource())
                     ->async()
                     ->creatable()
                     ->hideOnIndex(),

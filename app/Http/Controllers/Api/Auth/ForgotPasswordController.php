@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Lang;
 
 class ForgotPasswordController extends Controller
 {
@@ -16,17 +17,13 @@ class ForgotPasswordController extends Controller
             ->where('login', $request->validated('login'))
             ->firstOrFail();
 
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
-
         if (Hash::check($request->validated('password_old'), $user->password)) {
             $user->changePassword(
                 $request->validated('password')
             );
-            return response()->json(['message' => 'Password reset successful'], 200);
+            return response()->json(['message' => trans('messages.success_password')], 200);
         } else {
-            return response()->json(['message' => 'The current password is not correct'], 422);
+            return response()->json(['message' => trans('messages.not_correct_password')], 422);
         }
 
     }

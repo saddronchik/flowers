@@ -22,15 +22,15 @@ class BuyersResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
-                Text::make('Email','email')->required(),
-                Select::make('Статус','status')
+                Text::make(trans('buttons.email'),'email')->required(),
+                Select::make(trans('buttons.status'),'status')
                     ->options([
                         Buyer::STATUS_ACTIVE=>'Активен',
                         Buyer::STATUS_REFUSED=>'Отказано',
                     ])->default('Status')
                     ->required(),
 
-                HasMany::make('Заявки','applications', resource: new ApplicationResource())
+                HasMany::make(trans('buttons.applications'),'applications', resource: new ApplicationResource())
                     ->async()
                     ->creatable()
 //                    ->hideOnDetail()

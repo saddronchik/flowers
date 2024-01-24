@@ -91,7 +91,7 @@ class ApplicationController extends Controller
 
         $application->update(['status' => Application::STATUS_DELETE]);
 
-        return response()->json(['status' => true, 'message' => 'Status application delete'])
+        return response()->json(['status' => true, 'message' => trans('messages.status_delete')])
             ->setStatusCode(200);
     }
     public function status_by_store(Request $request)
@@ -100,7 +100,7 @@ class ApplicationController extends Controller
 
         $application->update(['status' => Application::STATUS_BY_STORE]);
 
-        return response()->json(['status' => true, 'message' => 'Status application by in store'])
+        return response()->json(['status' => true, 'message' => trans('messages.status_by_store')])
             ->setStatusCode(200);
     }
 
@@ -110,7 +110,7 @@ class ApplicationController extends Controller
 
         $application->update(['status' => Application::STATUS_BY_OTHER_STORE ]);
 
-        return response()->json(['status' => true, 'message' => 'Status application by other store'])
+        return response()->json(['status' => true, 'message' => trans('status_by_other_store')])
             ->setStatusCode(200);
     }
 }
