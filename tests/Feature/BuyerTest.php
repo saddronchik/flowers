@@ -13,6 +13,7 @@ class BuyerTest extends TestCase
         ];
         $response = $this->post('/api/register/buyer', $buyerData);
         $response->assertStatus(201);
+
         Buyer::query()->where('email','=','dronchik449@gmail.com')->delete();
     }
 }

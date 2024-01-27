@@ -45,9 +45,9 @@ class UserTest extends TestCase
             'password'=>'123456789',
             'password_confirmation'=>'123456789',
         ];
+
         $response = $this->post('/api/password/reset', $newPass);
         $response->assertStatus(200);
-
         User::query()->where('login','=','s888')->delete();
     }
 
