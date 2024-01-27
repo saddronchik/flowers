@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::post('/login', [LoginController::class, 'login'])->name('login');
 //Route::get('/', function () {
 //    return view('welcome');
 //});

@@ -18,8 +18,12 @@ class LoginService
     public function login(UserDTO $userDTO): User
     {
         $user = User::query()->where('login', $userDTO->login)->first();
+
         if (! $user || ! Hash::check($userDTO->password, $user->password)) {
-            throw new AuthException('The provided credentials are incorrect.');
+            throw new AuthException(trans('messages.account_provided_incorrect'));
+        }
+        if ($user['status'] == User::STATUS_MODERATION) {
+            throw new AuthException( trans('messages.account_status_moderation'));
         }
 
         $user->updateFcmToken($userDTO->fcm_token);
@@ -34,7 +38,7 @@ class LoginService
         $user = User::query()->findOrFail($userId);
 
         if (!$user) {
-            throw new NotFoundHttpException('Object not found');
+            throw new NotFoundHttpException(trans('not_found'));
         }
 
         $user->fcm_token = null;

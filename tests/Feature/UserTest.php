@@ -30,8 +30,27 @@ class UserTest extends TestCase
         ];
         $response = $this->post('/api/register', $userData);
         $response->assertStatus(201);
-
+        User::query()->where('login','=','sad_name2')->delete();
     }
+    public function test_user_change_pass()
+    {
+        $user = User::factory()->create([
+            'login' => 's888',
+            'password' => bcrypt('123456'),
+            'fcm_token' => '1',
+        ]);
+        $newPass =[
+            'login'=>'s888',
+            'password_old'=>'123456',
+            'password'=>'123456789',
+            'password_confirmation'=>'123456789',
+        ];
+        $response = $this->post('/api/password/reset', $newPass);
+        $response->assertStatus(200);
+
+        User::query()->where('login','=','s888')->delete();
+    }
+
     public function test_user_register_and_login()
     {
         $user = User::factory()->create([
@@ -49,6 +68,7 @@ class UserTest extends TestCase
         $auth = Auth::attempt(['login' => 'sad_name48', 'password' => '123456','fcm_token' => '1',]);
         $response->assertStatus(200);
 
+        User::query()->where('login','=','sad_name48')->delete();
     }
 
     public function findUser():User
